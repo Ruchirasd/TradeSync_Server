@@ -1,0 +1,34 @@
+AppBundle\Entity\User:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\UserRepository
+    manyToMany:
+        stocks:
+            targetEntity: AppBundle\Entity\Stock
+            inversedBy: users
+            joinTable:
+                name: users_stocks
+                joinColumns:
+                    user_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    stock_id:
+                        referencedColumnName: id
+
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        email:
+            type: string
+            length: 255
+        password:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }

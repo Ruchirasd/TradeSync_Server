@@ -1,0 +1,25 @@
+AppBundle\Entity\Exchange:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\ExchangeRepository
+    oneToMany:
+        stocks:
+          targetEntity: AppBundle\Entity\Stock
+          mappedBy: exchange
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        code:
+            type: string
+            length: 255
+        country:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }

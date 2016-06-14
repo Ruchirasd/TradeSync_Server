@@ -1,0 +1,23 @@
+AppBundle\Entity\StockHistory:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\StockHistoryRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        stockId:
+            type: integer
+            column: stock_id
+        maxPrice:
+            type: float
+            column: max_price
+        minPrice:
+            type: float
+            column: min_price
+        date:
+            type: date
+    lifecycleCallbacks: {  }

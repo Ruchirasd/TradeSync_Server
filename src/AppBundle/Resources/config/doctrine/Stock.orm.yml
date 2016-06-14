@@ -1,0 +1,34 @@
+AppBundle\Entity\Stock:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\StockRepository
+    manyToOne:
+        exchange:
+            targetEntity: AppBundle\Entity\Exchange
+            inversedBy: stocks
+            joinColumn:
+                name: exchange_id
+                referencedColumnName: id
+
+    manyToMany:
+        users:
+          targetEntity: AppBundle\Entity\User
+          mappedBy: stocks
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        stockCode:
+            type: string
+            length: 255
+            column: stock_code
+        lastPrice:
+            type: float
+            column: last_price
+        status:
+            type: integer
+            column: status
+    lifecycleCallbacks: {  }

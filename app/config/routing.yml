@@ -1,0 +1,35 @@
+register:
+    path: /request/user/register/{name}/{email}/{password}
+    defaults: { _controller: AppBundle:User:register }
+
+subscribe:
+    path: /request/user/subscribe/{userId}/{stockExCode}/{stockCode}
+    defaults: { _controller: AppBundle:User:subscribe }
+
+unsubscribe:
+    path: /request/user/unsubscribe/{userId}/{stockExCode}/{stockCode}
+    defaults: { _controller: AppBundle:User:unsubscribe }
+
+query_user:
+    path: /request/user/query/{userId}
+    defaults: { _controller: AppBundle:User:query }
+
+query_exchange:
+    path: /request/exchange/query
+    defaults: { _controller: AppBundle:Exchange:query }
+
+query_stock:
+    path: /request/stock/query/{stockExId}
+    defaults: { _controller: AppBundle:Stock:query }
+
+persist_exchange:
+    path: /persist/exchange/{name}/{code}/{country}
+    defaults: { _controller: AppBundle:Exchange:persistExchange }
+
+crawler_grab:
+    path: /crawler/grab/{stockExCode}
+    defaults: { _controller: AppBundle:Crawler:grab }
+
+crawler_update:
+    path: /crawler/update/{stockExCode}
+    defaults: { _controller: AppBundle:Crawler:update }
