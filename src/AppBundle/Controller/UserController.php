@@ -21,17 +21,31 @@ class UserController extends Controller
         $user->setPassword($password);
 
         $em = $this->getDoctrine()->getManager();
+        try {
+            //save the user
+            $em->persist($user);
 
-        //save the user
-        $em->persist($user);
-
-        // flush the created user to the database
-        $em->flush();
-
+            // flush the created user to the database
+            $em->flush();
+        }
+        catch(\Exception $e)
+        {
+            $user= null;
+        }
         //create the response
         $response = new Response();
 
-        $response->setContent('Saved new user with id '.$user->getId());
+        if($user== null){
+            $response->setContent('ERROR');
+        }else{
+            $content = new \StdClass();
+            $content->id = $user->getId();
+            $content->email = $user->getEmail();
+            $content->name = $user->getName();
+            $response->setContent(json_encode($content));
+        }
+
+
         $response->setStatusCode(Response::HTTP_OK);
         $response->headers->set('Content-Type', 'text/html');
         $response->headers->set('Access-Control-Allow-Origin', '*');
@@ -144,6 +158,37 @@ class UserController extends Controller
         return $response;
 
     }
+
+
+    public function validateUserAction($email,$password){
+        $user= $this->getDoctrine()
+            ->getRepository('AppBundle:User')
+            ->findOneBy(
+                array(
+                    'email' => $email,
+                    'password' => $password
+                )
+            );
+        $response = new Response();
+
+        if($user== null){
+            $response->setContent('ERROR');
+        }else{
+            $content = new \StdClass();
+            $content->id = $user->getId();
+            $content->email = $user->getEmail();
+            $content->name = $user->getName();
+            $response->setContent(json_encode($content));
+        }
+
+
+        $response->setStatusCode(Response::HTTP_OK);
+        $response->headers->set('Content-Type', 'text/html');
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        return $response;
+
+    }
+
 
 
 

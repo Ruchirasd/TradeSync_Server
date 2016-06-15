@@ -2,6 +2,10 @@ register:
     path: /request/user/register/{name}/{email}/{password}
     defaults: { _controller: AppBundle:User:register }
 
+validate:
+    path: /request/user/validate/{email}/{password}
+    defaults: { _controller: AppBundle:User:validateUser }
+
 subscribe:
     path: /request/user/subscribe/{userId}/{stockExCode}/{stockCode}
     defaults: { _controller: AppBundle:User:subscribe }

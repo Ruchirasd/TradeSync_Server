@@ -1,4 +1,7 @@
 AppBundle\Entity\User:
+    uniqueConstraints:
+        event_user_idx:
+            columns: email
     type: entity
     table: null
     repositoryClass: AppBundle\Repository\UserRepository
