@@ -19,5 +19,6 @@ AppBundle\Entity\StockHistory:
             type: float
             column: min_price
         date:
-            type: date
+            type: string
+            length: 50
     lifecycleCallbacks: {  }

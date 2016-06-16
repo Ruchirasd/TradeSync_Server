@@ -11,6 +11,29 @@ use Symfony\Component\HttpFoundation\Response;
 
 class StockController extends Controller
 {
+    private function getStockExId($stockExCode)
+    {
+        $stock = $this->getDoctrine()
+            ->getRepository('AppBundle:Exchange')
+            ->findOneBy(
+                array(
+                    'code' => $stockExCode
+                )
+            );
+        return $stock->getId();
+    }
+
+    private function getStockId($stockCode)
+    {
+        $stock = $this->getDoctrine()
+            ->getRepository('AppBundle:Stock')
+            ->findOneBy(
+                array(
+                    'stockCode' => $stockCode
+                )
+            );
+        return $stock->getId();
+    }
     //This is to query all the stocks related to given parameter(exchanges)
     public function queryAction(Request $request,$stockExId)
     {
@@ -18,7 +41,7 @@ class StockController extends Controller
             ->getRepository('AppBundle:Stock')
             ->findBy(
                 array(
-                    'exchange' => $stockExId
+                    'exchange' => $this->getStockExId($stockExId)
                 )
             );
 

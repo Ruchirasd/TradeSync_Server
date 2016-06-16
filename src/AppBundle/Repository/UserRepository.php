@@ -12,5 +12,17 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserRepository extends EntityRepository
 {
+    public function getUserDetails($id)
+    {
+        $em = $this->getEntityManager();
 
+        $query = $em->createQuery(
+            'SELECT s.stockCode, s.name, e.code, s.lastPrice
+                FROM AppBundle:Stock s
+                JOIN s.users u JOIN s.exchange e
+                WHERE u.id=:id'
+        )->setParameter('id', $id);
+        $res=$query->getResult();
+        return $res;
+    }
 }

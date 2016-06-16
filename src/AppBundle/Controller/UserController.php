@@ -149,9 +149,23 @@ class UserController extends Controller
         //generate response with showing up the user details
         $response = new Response();
 
-        $response->setContent('Requested new user with id '.$user->getId().
-            '<br> user name '.$user->getName().
-            '<br> user email '.$user->getEmail());
+        $repository = $this->getDoctrine()
+            ->getRepository('AppBundle:User');
+        $repo = $this->getDoctrine()
+            ->getRepository('AppBundle:StockHistory');
+
+
+        $userStoks=$repository->getUserDetails($userId);
+        $arr = [];
+
+        foreach($userStoks as $stock){
+
+
+            $history=$repo->getHistory($stock['stockCode']);
+            $stock=array_merge($stock,['history'=>$history]);
+            array_push($arr,$stock);
+        }
+        $response->setContent(json_encode($arr));
         $response->setStatusCode(Response::HTTP_OK);
         $response->headers->set('Content-Type', 'text/html');
         $response->headers->set('Access-Control-Allow-Origin', '*');

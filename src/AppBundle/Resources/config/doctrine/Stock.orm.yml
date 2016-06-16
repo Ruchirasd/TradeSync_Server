@@ -25,6 +25,10 @@ AppBundle\Entity\Stock:
             type: string
             length: 255
             column: stock_code
+        name:
+            type: string
+            length: 255
+            column: name
         lastPrice:
             type: float
             column: last_price

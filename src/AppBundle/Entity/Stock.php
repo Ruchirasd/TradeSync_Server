@@ -19,6 +19,10 @@ class Stock
      */
     private $stockCode;
 
+    /**
+     * @var string
+     */
+    private $name;
 
     /**
      * @var string
@@ -67,7 +71,7 @@ class Stock
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -90,7 +94,7 @@ class Stock
     /**
      * Get stockCode
      *
-     * @return string 
+     * @return string
      */
     public function getStockCode()
     {
@@ -113,7 +117,7 @@ class Stock
     /**
      * Get lastPrice
      *
-     * @return float 
+     * @return float
      */
     public function getLastPrice()
     {
@@ -136,7 +140,7 @@ class Stock
     /**
      * Get exchange
      *
-     * @return \AppBundle\Entity\Exchange 
+     * @return \AppBundle\Entity\Exchange
      */
     public function getExchange()
     {
@@ -169,10 +173,27 @@ class Stock
     /**
      * Get users
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getUsers()
     {
         return $this->users;
     }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
 }

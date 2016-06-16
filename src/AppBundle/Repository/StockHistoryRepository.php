@@ -12,4 +12,29 @@ use Doctrine\ORM\EntityRepository;
  */
 class StockHistoryRepository extends EntityRepository
 {
+    private function getStockId($stockCode)
+    {
+        $stock = $this->getEntityManager()
+            ->getRepository('AppBundle:Stock')
+            ->findOneBy(
+                array(
+                    'stockCode' => $stockCode
+                )
+            );
+        return $stock->getId();
+    }
+
+    public function getHistory($code)
+    {
+        $em = $this->getEntityManager();
+
+        $query = $em->createQuery(
+            'SELECT h.maxPrice, h.minPrice, h.stockId, h.date
+                FROM AppBundle:StockHistory h
+                WHERE h.stockId=:id ORDER BY h.date DESC'
+        )->setParameter('id', $this->getStockId($code));
+        $res = $query->getResult();
+        //var_dump(json_encode($res));
+        return $res;
+    }
 }
